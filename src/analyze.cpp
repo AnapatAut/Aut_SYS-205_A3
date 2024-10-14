@@ -481,19 +481,17 @@ int main()
         std::string hty_file_path = "test/test.hty";
         
         // Test extract_metadata
-        std::cout << "----------Metadata----------" << std::endl;
+        std::cout << std::endl << "----------Metadata----------" << std::endl;
         json metadata = extract_metadata(hty_file_path);
-        std::cout << std::endl;
 
         // Test project_single_column and display_column
-        std::cout << "----------Single column----------" << std::endl;
+        std::cout << std::endl << "----------Single column----------" << std::endl;
         std::string column_name = "salary";
         std::vector<int> column_data = project_single_column(metadata, hty_file_path, column_name);
         display_column(metadata, column_name, column_data);
-        std::cout << std::endl;
 
         // Test project and display_result_set for all columns
-        std::cout << "----------All Columns----------" << std::endl;
+        std::cout << std::endl << "----------All Columns----------" << std::endl;
         std::vector<std::string> all_columns;
         for (const auto& group : metadata["groups"])
         {
@@ -504,10 +502,9 @@ int main()
         }
         std::vector<std::vector<int>> all_data = project(metadata, hty_file_path, all_columns);
         display_result_set(metadata, all_columns, all_data);
-        std::cout << std::endl;
 
         // Test filter
-        std::cout << "----------Filter----------" << std::endl;
+        std::cout << std::endl << "----------Filter----------" << std::endl;
         std::string filter_column = "salary";
         float filter_value = 50000.0f;
         int filter_op = 2; // Less than
@@ -525,10 +522,9 @@ int main()
         std::vector<std::vector<int>> projected_data = project(metadata, hty_file_path, projected_columns);
         std::cout << "Projected data size: " << projected_data.size() << " x " << projected_data[0].size() << std::endl;
         display_result_set(metadata, projected_columns, projected_data);
-        std::cout << std::endl;
 
         // Test project_and_filter
-        std::cout << "----------Project and Filter----------" << std::endl;
+        std::cout << std::endl << "----------Project and Filter----------" << std::endl;
         filter_column = "salary";
         filter_value = 50000.0f;
         filter_op = 2; // Less than
@@ -590,7 +586,6 @@ int main()
                 assert(expected_value == actual_value && "New row data mismatch");
             }
         }
-        std::cout << std::endl;
     }
     catch (const std::exception& e)
     {
@@ -598,6 +593,6 @@ int main()
         return 1;
     }
     
-    std::cout << "\033[1;32mAll tests completed!\033[0m" << std::endl;
+    std::cout << std::endl << "\033[1;32mAll tests completed!\033[0m" << std::endl;
     return 0;
 }
