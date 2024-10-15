@@ -1,6 +1,3 @@
-// CSV to HTY Converter
-// Converts CSV files to a custom HTY format with metadata
-
 #include <cstring>
 #include <fstream>
 #include <iostream>

@@ -508,13 +508,27 @@ int main()
         std::string filter_column = "salary";
         float filter_value = 50000.0f;
         int filter_op = 2; // Less than
+        std::vector<int> unfiltered_data = project_single_column(metadata, hty_file_path, filter_column);
         std::vector<int> filtered_indices = filter(metadata, hty_file_path, filter_column, filter_op, filter_value);
         std::cout << "Filtered indices (" << filter_column << " " << operation_to_string(filter_op) << " " << filter_value << "): ";
         for (const auto& index : filtered_indices)
         {
             std::cout << index << " ";
         }
-        std::cout << std::endl << std::endl;
+        std::cout << unfiltered_data.size() << std::endl;
+        std::vector<int> result;
+        for (const auto& index : filtered_indices)
+        {
+            if (index >= unfiltered_data.size())
+            {
+                print_debug("Index out of range: %d\n", index);
+                continue;
+            }
+            int value = unfiltered_data[index];
+            result.push_back(value);
+        }
+        display_column(metadata, filter_column, result);
+        std::cout << std::endl;
 
         // Test project with specific columns
         std::cout << "----------Project----------" << std::endl;
